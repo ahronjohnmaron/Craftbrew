@@ -4,301 +4,314 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrewCraft - Modern Coffee Experience</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+
+    <!-- Critical CSS Inlined -->
     <style>
+        /* Critical Above-the-fold CSS */
         :root {
-            --primary-gradient: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-            --secondary-gradient: linear-gradient(135deg, #F4A460 0%, #DEB887 100%);
+            --primary: #8B4513;
+            --secondary: #D2691E;
+            --amber-600: #d97706;
+            --orange-600: #ea580c;
             --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
+            background: linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%);
         }
 
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Advanced Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        @keyframes slideInLeft {
-            0% {
-                opacity: 0;
-                transform: translateX(-100px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            0% {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes wiggle {
-            0%, 7%, 100% { transform: rotate(0deg); }
-            15% { transform: rotate(-3deg); }
-            20% { transform: rotate(3deg); }
-        }
-
-        /* Glass Morphism */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-        }
-
-        /* Modern Button Styles */
-        .btn-modern {
-            position: relative;
-            overflow: hidden;
-            transform: perspective(1px) translateZ(0);
-            transition: all 0.3s ease;
-        }
-
-        .btn-modern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-modern:hover::before {
-            left: 100%;
-        }
-
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        /* Gradient Text */
-        .gradient-text {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% 200%;
-            animation: gradientShift 3s ease infinite;
-        }
-
-        /* Floating Elements */
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .float-delayed {
-            animation: float 6s ease-in-out infinite;
-            animation-delay: -2s;
-        }
-
-        /* Card Hover Effects */
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
-
-        .card-hover:hover {
-            transform: translateY(-15px) rotateX(10deg);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-
-        /* Scroll Animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Modern Navbar */
-        .navbar-glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Particle Background */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(139, 69, 19, 0.1);
-            border-radius: 50%;
-            animation: float 8s linear infinite;
-        }
-
-        /* Responsive Typography */
-        @media (max-width: 640px) {
-            .hero-title {
-                font-size: 2.5rem;
-                line-height: 1.1;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #8B4513, #D2691E);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #A0522D, #F4A460);
-        }
-
-        /* Loading Animation */
-        .loading {
+        /* Navbar - Critical */
+        .navbar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: #1a1a1a;
+            right: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--amber-600), var(--orange-600));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.125rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section - Critical */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5rem 1.5rem 0;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title .gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 4vw, 1.5rem);
+            color: #6b7280;
+            margin-bottom: 3rem;
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--amber-600), var(--orange-600));
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--amber-600);
+            color: var(--amber-600);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: var(--amber-600);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Desktop Navigation */
+        .nav-desktop {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-desktop {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            color: #374151;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--amber-600);
+        }
+
+        /* Mobile Menu Button */
+        .mobile-btn {
+            display: block;
+            background: none;
+            border: none;
+            color: #374151;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-btn {
+                display: none;
+            }
+        }
+
+        .mobile-btn:hover {
+            color: var(--amber-600);
+        }
+
+        /* Loading optimization */
+        .loading-placeholder {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--amber-600), transparent);
+            position: fixed;
+            top: 0;
+            left: 0;
             z-index: 9999;
+            animation: loading 1s ease-in-out;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        /* Hide non-critical content initially */
+        .lazy-section {
+            opacity: 0;
             transition: opacity 0.5s ease;
         }
 
-        .coffee-loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #8B4513;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .lazy-section.loaded {
+            opacity: 1;
         }
     </style>
+
+    <!-- Load Tailwind CSS asynchronously -->
+    <script>
+        // Load Tailwind CSS asynchronously to not block rendering
+        const tailwindLink = document.createElement('link');
+        tailwindLink.rel = 'stylesheet';
+        tailwindLink.href = 'https://cdn.tailwindcss.com';
+        tailwindLink.onload = function() {
+            document.body.classList.add('tailwind-loaded');
+            // Load FontAwesome after Tailwind
+            loadFontAwesome();
+        };
+        document.head.appendChild(tailwindLink);
+
+        function loadFontAwesome() {
+            const faLink = document.createElement('link');
+            faLink.rel = 'stylesheet';
+            faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            faLink.onload = function() {
+                // Load Google Fonts after FA
+                loadGoogleFonts();
+                // Show lazy sections
+                showLazySections();
+            };
+            document.head.appendChild(faLink);
+        }
+
+        function loadGoogleFonts() {
+            const googleFonts = document.createElement('link');
+            googleFonts.rel = 'stylesheet';
+            googleFonts.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap';
+            document.head.appendChild(googleFonts);
+        }
+
+        function showLazySections() {
+            setTimeout(() => {
+                document.querySelectorAll('.lazy-section').forEach(section => {
+                    section.classList.add('loaded');
+                });
+            }, 100);
+        }
+    </script>
 </head>
-<body class="bg-gradient-to-br from-amber-50 to-orange-50">
-    <!-- Loading Screen -->
-    <div id="loading" class="loading">
-        <div class="coffee-loader"></div>
-    </div>
+<body>
+    <!-- Fast Loading Indicator -->
+    <div class="loading-placeholder"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar-glass fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full flex items-center justify-center float">
-                        <i class="fas fa-coffee text-white text-lg"></i>
-                    </div>
-                    <span class="text-2xl font-bold gradient-text font-display">BrewCraft</span>
+    <!-- Navigation - Critical Content -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    ☕
                 </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-300 relative">
-                        Home
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300"></span>
-                    </a>
-                    <a href="#menu" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-300 relative">
-                        Menu
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300"></span>
-                    </a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-300 relative">
-                        About
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300"></span>
-                    </a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-amber-600 font-medium transition-colors duration-300 relative">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300"></span>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-gray-700 hover:text-amber-600 transition-colors duration-300" id="mobile-btn">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+                <span class="logo-text">BrewCraft</span>
             </div>
+
+            <div class="nav-desktop">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <button class="mobile-btn" id="mobile-btn">☰</button>
         </div>
 
         <!-- Mobile Menu -->
@@ -312,262 +325,199 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <!-- Particle Background -->
-        <div class="particles">
-            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-            <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
-            <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
-            <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
-            <div class="particle" style="left: 70%; animation-delay: 1.5s;"></div>
-            <div class="particle" style="left: 80%; animation-delay: 2.5s;"></div>
-            <div class="particle" style="left: 90%; animation-delay: 4.5s;"></div>
-        </div>
+    <!-- Hero Section - Critical Content -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="gradient">Craft Your</span><br>
+                <span>Perfect Moment</span>
+            </h1>
 
-        <div class="container mx-auto px-6 py-20 text-center relative z-10">
-            <div class="max-w-4xl mx-auto">
-                <!-- Hero Title -->
-                <h1 class="hero-title text-5xl md:text-7xl font-black font-display mb-6 scroll-reveal">
-                    <span class="gradient-text">Craft Your</span>
-                    <br>
-                    <span class="text-gray-800">Perfect Moment</span>
-                </h1>
+            <p class="hero-subtitle">
+                Where premium coffee meets modern design. Experience the art of brewing in our contemporary space.
+            </p>
 
-                <!-- Hero Subtitle -->
-                <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed scroll-reveal">
-                    Where premium coffee meets modern design. Experience the art of brewing in our contemporary space.
-                </p>
-
-                <!-- Hero Buttons -->
-                <div class="flex flex-col sm:flex-row gap-6 justify-center scroll-reveal">
-                    <button class="btn-modern bg-gradient-to-r from-amber-600 to-orange-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300">
-                        <i class="fas fa-coffee mr-2"></i>
-                        Order Now
-                    </button>
-                    <button class="btn-modern border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300">
-                        <i class="fas fa-play mr-2"></i>
-                        Watch Story
-                    </button>
-                </div>
-            </div>
-
-            <!-- Floating Coffee Icons -->
-            <div class="absolute top-20 left-10 text-6xl text-amber-200/30 float">
-                <i class="fas fa-coffee"></i>
-            </div>
-            <div class="absolute bottom-20 right-10 text-5xl text-orange-200/30 float-delayed">
-                <i class="fas fa-mug-hot"></i>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">
+                    ☕ Order Now
+                </button>
+                <button class="btn btn-secondary">
+                    ▶ Watch Story
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="py-20 bg-gradient-to-br from-white to-amber-50 relative">
-        <div class="container mx-auto px-6">
-            <!-- Section Header -->
-            <div class="text-center mb-16 scroll-reveal">
-                <span class="text-amber-600 font-semibold text-lg uppercase tracking-wider">Our Menu</span>
-                <h2 class="text-4xl md:text-5xl font-black font-display mt-4 mb-6 text-gray-800">
-                    Signature <span class="gradient-text">Creations</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Each cup is carefully crafted with passion and precision
-                </p>
-            </div>
-
-            <!-- Menu Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                <!-- Menu Item 1 -->
-                <div class="card-hover glass rounded-3xl p-8 text-center scroll-reveal">
-                    <div class="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 float">
-                        <i class="fas fa-coffee text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Signature Espresso</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Rich, bold espresso shot with perfect crema and aromatic finish
-                    </p>
-                    <div class="text-3xl font-black gradient-text mb-4">$4.50</div>
-                    <button class="btn-modern bg-white/50 hover:bg-white text-amber-600 px-6 py-2 rounded-full font-semibold transition-all duration-300">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <!-- Menu Item 2 -->
-                <div class="card-hover glass rounded-3xl p-8 text-center scroll-reveal">
-                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-6 float-delayed">
-                        <i class="fas fa-mug-hot text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Caramel Macchiato</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Smooth espresso with steamed milk, vanilla, and caramel drizzle
-                    </p>
-                    <div class="text-3xl font-black gradient-text mb-4">$5.75</div>
-                    <button class="btn-modern bg-white/50 hover:bg-white text-amber-600 px-6 py-2 rounded-full font-semibold transition-all duration-300">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <!-- Menu Item 3 -->
-                <div class="card-hover glass rounded-3xl p-8 text-center scroll-reveal">
-                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6 float">
-                        <i class="fas fa-snowflake text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Cold Brew Delight</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Smooth cold-brewed coffee served over ice with a hint of vanilla
-                    </p>
-                    <div class="text-3xl font-black gradient-text mb-4">$4.25</div>
-                    <button class="btn-modern bg-white/50 hover:bg-white text-amber-600 px-6 py-2 rounded-full font-semibold transition-all duration-300">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <!-- Menu Item 4 -->
-                <div class="card-hover glass rounded-3xl p-8 text-center scroll-reveal">
-                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6 float-delayed">
-                        <i class="fas fa-leaf text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Matcha Fusion</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Premium matcha powder with steamed milk and honey sweetness
-                    </p>
-                    <div class="text-3xl font-black gradient-text mb-4">$5.25</div>
-                    <button class="btn-modern bg-white/50 hover:bg-white text-amber-600 px-6 py-2 rounded-full font-semibold transition-all duration-300">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <!-- Menu Item 5 -->
-                <div class="card-hover glass rounded-3xl p-8 text-center scroll-reveal">
-                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 float">
-                        <i class="fas fa-cookie-bite text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Artisan Pastries</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Fresh-baked croissants, muffins, and seasonal specialties
-                    </p>
-                    <div class="text-3xl font-black gradient-text mb-4">$3.95</div>
-                    <button class="btn-modern bg-white/50 hover:bg-white text-amber-600 px-6 py-2 rounded-full font-semibold transition-all duration-300">
-                        Add to Cart
-                    </button>
-                </div>
-
-                <!-- Menu Item 6 -->
-                <div class="card-hover glass rounded-3xl p-8 text-center scroll-reveal">
-                    <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 float-delayed">
-                        <i class="fas fa-birthday-cake text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Gourmet Desserts</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Handcrafted cakes, tarts, and chocolate delicacies
-                    </p>
-                    <div class="text-3xl font-black gradient-text mb-4">$6.50</div>
-                    <button class="btn-modern bg-white/50 hover:bg-white text-amber-600 px-6 py-2 rounded-full font-semibold transition-all duration-300">
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Left Content -->
-                <div class="scroll-reveal">
-                    <span class="text-amber-400 font-semibold text-lg uppercase tracking-wider">Our Story</span>
-                    <h2 class="text-4xl md:text-5xl font-black font-display mt-4 mb-8">
-                        Crafting Coffee <span class="gradient-text">Excellence</span>
+    <!-- Lazy-loaded sections -->
+    <div class="lazy-section">
+        <!-- Menu Section -->
+        <section id="menu" class="py-20 bg-gradient-to-br from-white to-amber-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-amber-600 font-semibold text-lg uppercase tracking-wider">Our Menu</span>
+                    <h2 class="text-4xl md:text-5xl font-black font-display mt-4 mb-6 text-gray-800">
+                        Signature <span class="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Creations</span>
                     </h2>
-                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                        Since 2018, BrewCraft has been at the forefront of the specialty coffee movement. 
-                        We source the finest beans from sustainable farms worldwide and roast them to perfection 
-                        in our state-of-the-art facility.
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Each cup is carefully crafted with passion and precision
                     </p>
-                    <p class="text-lg text-gray-400 mb-10 leading-relaxed">
-                        Our modern space combines cutting-edge brewing technology with a warm, welcoming atmosphere 
-                        where coffee lovers gather to experience exceptional quality and innovative flavors.
-                    </p>
-
-                    <!-- Stats -->
-                    <div class="grid grid-cols-3 gap-8">
-                        <div class="text-center">
-                            <div class="text-3xl font-black gradient-text mb-2">50K+</div>
-                            <div class="text-sm text-gray-400 uppercase tracking-wider">Happy Customers</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-black gradient-text mb-2">25+</div>
-                            <div class="text-sm text-gray-400 uppercase tracking-wider">Coffee Varieties</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-black gradient-text mb-2">7</div>
-                            <div class="text-sm text-gray-400 uppercase tracking-wider">Years Experience</div>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Right Content -->
-                <div class="scroll-reveal">
-                    <div class="relative">
-                        <!-- Main Card -->
-                        <div class="glass rounded-3xl p-8 relative z-10">
-                            <div class="text-center mb-8">
-                                <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 float">
-                                    <i class="fas fa-store text-white text-3xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold mb-4">Visit Our Flagship Store</h3>
-                                <p class="text-gray-300 mb-6">Experience our complete range in person</p>
-                            </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <!-- Menu Items -->
+                    <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 text-center hover:transform hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-coffee text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Signature Espresso</h3>
+                        <p class="text-gray-600 mb-6">Rich, bold espresso shot with perfect crema</p>
+                        <div class="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">$4.50</div>
+                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-700 px-6 py-2 rounded-full font-semibold transition-all duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
 
-                            <!-- Hours -->
+                    <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 text-center hover:transform hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-mug-hot text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Caramel Macchiato</h3>
+                        <p class="text-gray-600 mb-6">Smooth espresso with steamed milk and caramel</p>
+                        <div class="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">$5.75</div>
+                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-700 px-6 py-2 rounded-full font-semibold transition-all duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+
+                    <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 text-center hover:transform hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-snowflake text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Cold Brew Delight</h3>
+                        <p class="text-gray-600 mb-6">Smooth cold-brewed coffee with vanilla hints</p>
+                        <div class="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">$4.25</div>
+                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-700 px-6 py-2 rounded-full font-semibold transition-all duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+
+                    <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 text-center hover:transform hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-leaf text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Matcha Fusion</h3>
+                        <p class="text-gray-600 mb-6">Premium matcha with steamed milk and honey</p>
+                        <div class="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">$5.25</div>
+                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-700 px-6 py-2 rounded-full font-semibold transition-all duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+
+                    <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 text-center hover:transform hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-cookie-bite text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Artisan Pastries</h3>
+                        <p class="text-gray-600 mb-6">Fresh-baked croissants and seasonal treats</p>
+                        <div class="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">$3.95</div>
+                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-700 px-6 py-2 rounded-full font-semibold transition-all duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+
+                    <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 text-center hover:transform hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-birthday-cake text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Gourmet Desserts</h3>
+                        <p class="text-gray-600 mb-6">Handcrafted cakes and chocolate delicacies</p>
+                        <div class="text-3xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">$6.50</div>
+                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-700 px-6 py-2 rounded-full font-semibold transition-all duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="text-amber-400 font-semibold text-lg uppercase tracking-wider">Our Story</span>
+                        <h2 class="text-4xl md:text-5xl font-black font-display mt-4 mb-8">
+                            Crafting Coffee <span class="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Excellence</span>
+                        </h2>
+                        <p class="text-xl text-gray-300 mb-8">
+                            Since 2018, BrewCraft has been at the forefront of the specialty coffee movement. 
+                            We source the finest beans from sustainable farms worldwide.
+                        </p>
+                        <p class="text-lg text-gray-400 mb-10">
+                            Our modern space combines cutting-edge brewing technology with a warm, welcoming atmosphere.
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-8">
+                            <div class="text-center">
+                                <div class="text-3xl font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent mb-2">50K+</div>
+                                <div class="text-sm text-gray-400 uppercase">Happy Customers</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent mb-2">25+</div>
+                                <div class="text-sm text-gray-400 uppercase">Coffee Varieties</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent mb-2">7</div>
+                                <div class="text-sm text-gray-400 uppercase">Years Experience</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 text-center">
+                            <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-store text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4">Visit Our Flagship Store</h3>
+                            <p class="text-gray-300 mb-6">Experience our complete range in person</p>
+
                             <div class="space-y-3">
-                                <div class="flex justify-between items-center">
+                                <div class="flex justify-between">
                                     <span class="text-gray-400">Monday - Friday</span>
-                                    <span class="font-semibold">6:00 AM - 9:00 PM</span>
+                                    <span>6:00 AM - 9:00 PM</span>
                                 </div>
-                                <div class="flex justify-between items-center">
+                                <div class="flex justify-between">
                                     <span class="text-gray-400">Saturday</span>
-                                    <span class="font-semibold">7:00 AM - 10:00 PM</span>
+                                    <span>7:00 AM - 10:00 PM</span>
                                 </div>
-                                <div class="flex justify-between items-center">
+                                <div class="flex justify-between">
                                     <span class="text-gray-400">Sunday</span>
-                                    <span class="font-semibold">8:00 AM - 8:00 PM</span>
+                                    <span>8:00 AM - 8:00 PM</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Background Decoration -->
-                        <div class="absolute top-4 left-4 w-full h-full bg-gradient-to-r from-amber-600 to-orange-600 rounded-3xl -z-10"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-amber-50 to-orange-100">
-        <div class="container mx-auto px-6">
-            <!-- Section Header -->
-            <div class="text-center mb-16 scroll-reveal">
-                <span class="text-amber-600 font-semibold text-lg uppercase tracking-wider">Get In Touch</span>
-                <h2 class="text-4xl md:text-5xl font-black font-display mt-4 mb-6 text-gray-800">
-                    Let's <span class="gradient-text">Connect</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-                </p>
-            </div>
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gradient-to-br from-amber-50 to-orange-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-amber-600 font-semibold text-lg uppercase tracking-wider">Get In Touch</span>
+                    <h2 class="text-4xl md:text-5xl font-black font-display mt-4 mb-6 text-gray-800">
+                        Let's <span class="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Connect</span>
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+                    </p>
+                </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-                <!-- Contact Info -->
-                <div class="scroll-reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
                     <div class="space-y-8">
                         <div class="flex items-start space-x-6">
-                            <div class="w-14 h-14 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center flex-shrink-0 float">
+                            <div class="w-14 h-14 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-map-marker-alt text-white text-xl"></i>
                             </div>
                             <div>
@@ -577,7 +527,7 @@
                         </div>
 
                         <div class="flex items-start space-x-6">
-                            <div class="w-14 h-14 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center flex-shrink-0 float-delayed">
+                            <div class="w-14 h-14 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-phone text-white text-xl"></i>
                             </div>
                             <div>
@@ -587,7 +537,7 @@
                         </div>
 
                         <div class="flex items-start space-x-6">
-                            <div class="w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center flex-shrink-0 float">
+                            <div class="w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-envelope text-white text-xl"></i>
                             </div>
                             <div>
@@ -596,279 +546,174 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Contact Form -->
-                <div class="scroll-reveal">
-                    <form class="glass rounded-3xl p-8 space-y-6">
+                    <form class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 space-y-6">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <input type="text" placeholder="Your Name" 
-                                       class="w-full px-6 py-4 bg-white/50 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all duration-300 font-medium">
-                            </div>
-                            <div>
-                                <input type="email" placeholder="Your Email" 
-                                       class="w-full px-6 py-4 bg-white/50 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all duration-300 font-medium">
-                            </div>
+                            <input type="text" placeholder="Your Name" 
+                                   class="w-full px-6 py-4 bg-white/70 border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-300">
+                            <input type="email" placeholder="Your Email" 
+                                   class="w-full px-6 py-4 bg-white/70 border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-300">
                         </div>
-
-                        <div>
-                            <input type="text" placeholder="Subject" 
-                                   class="w-full px-6 py-4 bg-white/50 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all duration-300 font-medium">
-                        </div>
-
-                        <div>
-                            <textarea placeholder="Your Message" rows="6" 
-                                      class="w-full px-6 py-4 bg-white/50 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all duration-300 font-medium resize-none"></textarea>
-                        </div>
-
+                        <input type="text" placeholder="Subject" 
+                               class="w-full px-6 py-4 bg-white/70 border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-300">
+                        <textarea placeholder="Your Message" rows="6" 
+                                  class="w-full px-6 py-4 bg-white/70 border border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-300 resize-none"></textarea>
                         <button type="submit" 
-                                class="btn-modern w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                                class="w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white py-4 rounded-2xl font-semibold text-lg hover:transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
                             <i class="fas fa-paper-plane mr-2"></i>
                             Send Message
                         </button>
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <!-- Brand -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full flex items-center justify-center float">
-                            <i class="fas fa-coffee text-white text-xl"></i>
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div class="md:col-span-2">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-coffee text-white text-xl"></i>
+                            </div>
+                            <span class="text-3xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">BrewCraft</span>
                         </div>
-                        <span class="text-3xl font-bold gradient-text font-display">BrewCraft</span>
+                        <p class="text-gray-400 leading-relaxed max-w-md mb-8">
+                            Experience the perfect blend of modern design and traditional craftsmanship. 
+                            Every cup tells a story of passion and precision.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed max-w-md">
-                        Experience the perfect blend of modern design and traditional craftsmanship. 
-                        Every cup tells a story of passion and precision.
-                    </p>
 
-                    <!-- Social Links -->
-                    <div class="flex space-x-4 mt-8">
-                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                    <div>
+                        <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#home" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">Home</a></li>
+                            <li><a href="#menu" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">Menu</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">About</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-6">Contact Info</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li><i class="fas fa-map-marker-alt mr-3 text-amber-400"></i>123 Coffee Street</li>
+                            <li><i class="fas fa-phone mr-3 text-amber-400"></i>+1 (555) 123-BREW</li>
+                            <li><i class="fas fa-envelope mr-3 text-amber-400"></i>hello@brewcraft.com</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-xl font-bold mb-6">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">Home</a></li>
-                        <li><a href="#menu" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">Menu</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">About</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-amber-400 transition-colors duration-300">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Info -->
-                <div>
-                    <h3 class="text-xl font-bold mb-6">Contact Info</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li><i class="fas fa-map-marker-alt mr-3 text-amber-400"></i>123 Coffee Street</li>
-                        <li><i class="fas fa-phone mr-3 text-amber-400"></i>+1 (555) 123-BREW</li>
-                        <li><i class="fas fa-envelope mr-3 text-amber-400"></i>hello@brewcraft.com</li>
-                    </ul>
+                <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                    <p>&copy; 2025 BrewCraft. All rights reserved. Crafted with <i class="fas fa-heart text-red-500 mx-1"></i> for coffee lovers.</p>
                 </div>
             </div>
-
-            <!-- Copyright -->
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 BrewCraft. All rights reserved. Crafted with <i class="fas fa-heart text-red-500 mx-1"></i> for coffee lovers.</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 opacity-0 invisible z-50 btn-modern">
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 opacity-0 invisible z-50">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- JavaScript -->
+    <!-- JavaScript - Optimized -->
     <script>
-        // Loading Screen
-        window.addEventListener('load', () => {
-            const loading = document.getElementById('loading');
+        // Critical JavaScript only
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove loading placeholder
             setTimeout(() => {
-                loading.style.opacity = '0';
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 500);
-            }, 1500);
-        });
+                const loader = document.querySelector('.loading-placeholder');
+                if (loader) loader.remove();
+            }, 1000);
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('shadow-xl');
-                navbar.classList.remove('shadow-lg');
-            } else {
-                navbar.classList.remove('shadow-xl');
-                navbar.classList.add('shadow-lg');
+            // Mobile menu
+            const mobileBtn = document.getElementById('mobile-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let mobileMenuOpen = false;
+
+            if (mobileBtn && mobileMenu) {
+                mobileBtn.addEventListener('click', () => {
+                    mobileMenuOpen = !mobileMenuOpen;
+                    if (mobileMenuOpen) {
+                        mobileMenu.classList.remove('-translate-y-full', 'opacity-0');
+                        mobileMenu.classList.add('translate-y-0', 'opacity-100');
+                        mobileBtn.textContent = '✕';
+                    } else {
+                        mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+                        mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+                        mobileBtn.textContent = '☰';
+                    }
+                });
             }
-        });
 
-        // Mobile Menu
-        const mobileBtn = document.getElementById('mobile-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let mobileMenuOpen = false;
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        if (mobileMenuOpen) {
+                            mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+                            mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+                            mobileBtn.textContent = '☰';
+                            mobileMenuOpen = false;
+                        }
+                    }
+                });
+            });
 
-        mobileBtn.addEventListener('click', () => {
-            mobileMenuOpen = !mobileMenuOpen;
-            if (mobileMenuOpen) {
-                mobileMenu.classList.remove('-translate-y-full', 'opacity-0');
-                mobileMenu.classList.add('translate-y-0', 'opacity-100');
-                mobileBtn.innerHTML = '<i class="fas fa-times text-xl"></i>';
-            } else {
-                mobileMenu.classList.add('-translate-y-full', 'opacity-0');
-                mobileMenu.classList.remove('translate-y-0', 'opacity-100');
-                mobileBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+            // Back to top button
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        backToTopBtn.classList.remove('opacity-0', 'invisible');
+                        backToTopBtn.classList.add('opacity-100', 'visible');
+                    } else {
+                        backToTopBtn.classList.add('opacity-0', 'invisible');
+                        backToTopBtn.classList.remove('opacity-100', 'visible');
+                    }
+                });
+
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
             }
-        });
 
-        // Navigation Link Hover Effect
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('mouseenter', function() {
-                this.querySelector('span').style.width = '100%';
-            });
-            link.addEventListener('mouseleave', function() {
-                this.querySelector('span').style.width = '0';
-            });
-        });
+            // Form submission
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const button = this.querySelector('button[type="submit"]');
+                    const originalText = button.innerHTML;
 
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                    button.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
+                    button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
 
-                // Close mobile menu if open
-                if (mobileMenuOpen) {
-                    mobileMenu.classList.add('-translate-y-full', 'opacity-0');
-                    mobileMenu.classList.remove('translate-y-0', 'opacity-100');
-                    mobileBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
-                    mobileMenuOpen = false;
-                }
-            });
-        });
-
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach((el) => {
-            observer.observe(el);
-        });
-
-        // Back to Top Button
-        const backToTopBtn = document.getElementById('back-to-top');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.remove('opacity-0', 'invisible');
-                backToTopBtn.classList.add('opacity-100', 'visible');
-            } else {
-                backToTopBtn.classList.add('opacity-0', 'invisible');
-                backToTopBtn.classList.remove('opacity-100', 'visible');
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.style.background = 'linear-gradient(135deg, #d97706, #ea580c)';
+                        this.reset();
+                    }, 3000);
+                });
             }
-        });
-
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Form Submission
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Show success message
-            const button = this.querySelector('button[type="submit"]');
-            const originalText = button.innerHTML;
-
-            button.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
-            button.classList.add('bg-green-500');
-            button.classList.remove('from-amber-600', 'to-orange-600');
-
-            setTimeout(() => {
-                button.innerHTML = originalText;
-                button.classList.remove('bg-green-500');
-                button.classList.add('from-amber-600', 'to-orange-600');
-                this.reset();
-            }, 3000);
-        });
-
-        // Add some interactive particles
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 8 + 's';
-            particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
-
-            document.querySelector('.particles').appendChild(particle);
-
-            setTimeout(() => {
-                particle.remove();
-            }, 8000);
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 2000);
-
-        // Performance optimization
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('*').forEach(el => {
-                el.style.animationDuration = '0.01s';
-                el.style.transitionDuration = '0.01s';
-            });
-        }
-
-        // Add wiggle effect to coffee icons on hover
-        document.querySelectorAll('.fa-coffee, .fa-mug-hot').forEach(icon => {
-            icon.parentElement.addEventListener('mouseenter', function() {
-                this.style.animation = 'wiggle 0.5s ease-in-out';
-            });
-
-            icon.parentElement.addEventListener('animationend', function() {
-                this.style.animation = '';
-            });
         });
     </script>
 </body>
